@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <stdbool.h>
 
 /// <summary>
 /// Constant value for dynamic formatting of input prompt length.
@@ -99,7 +100,7 @@ void insertAtEnd(int year, int month, int day, int hour, int minute, int second,
 		}
 
 		// Assign the given values to the newly created measurement.
-		*head = { temperature, {year, month, day, hour, minute, second} };
+		*head = (struct measurement){temperature,{year, month, day, hour, minute, second}};
 
 		// There's no successor for the new entry yet. Set next-pointer of entry to NULL.
 		head->next = NULL;
@@ -124,7 +125,7 @@ void insertAtEnd(int year, int month, int day, int hour, int minute, int second,
 		lastNode = lastNode->next;
 
 		// Assign the given values to the newly created measurement.
-		*lastNode = { temperature, {year, month, day, hour, minute, second} };
+		*lastNode = (struct measurement){ temperature, {year, month, day, hour, minute, second} };
 
 		// There's no successor for the new entry yet. Set next-pointer of entry to NULL.
 		lastNode->next = NULL;
@@ -147,12 +148,12 @@ void insertAtBeginning(int year, int month, int day, int hour, int minute, int s
 
 	struct measurement *newNode;
 
-	if ((newNode = (measurement *)malloc(sizeof(struct measurement))) == NULL) {
+	if ((newNode = (struct measurement *)malloc(sizeof(struct measurement))) == NULL) {
 		printf("Cannot allocate memory.\n");
 		return;
 	}
 
-	*newNode = { temperature, { year, month, day, hour, minute, second} };
+	*newNode = (struct measurement){ temperature, { year, month, day, hour, minute, second} };
 
 	newNode->next = head;
 	head = newNode;
@@ -192,13 +193,13 @@ void insertChronologically(int year, int month, int day, int hour, int minute, i
 		nodeToInsertAfter = head;
 
 		// Allocate memory for the new node to insert into the singly linked list.
-		if ((newNode = (measurement *)malloc(sizeof(struct measurement))) == NULL) {
+		if ((newNode = (struct measurement *)malloc(sizeof(struct measurement))) == NULL) {
 			printf("Cannot allocate memory.\n");
 			return;
 		}
 
 		// Assign the provided parameter values to the new node referenced by the newNode pointer.
-		*newNode = { temperature, { year, month, day, hour, minute, second} };
+		*newNode = (struct measurement){ temperature, { year, month, day, hour, minute, second} };
 
 		// If the new nodes date/time is before the first nodes date/time,
 		// the new node needs to go at the beginning (head) of the singly linked list.
