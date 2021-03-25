@@ -1,6 +1,8 @@
-# Einfach verkettete Liste
+# Single linked list
 
-Die einfach verkettete Liste ist eine der häufigsten und gebräuchlichsten, dynamischen Datenstrukturen.Sie zeichnet sich dadurch aus, dass Daten ineiner Liste gespeichert werden, welche «in einer Richtung» durchlaufen (=iteriert) werden kann.Dabei «kennt» jedes Element in der Liste –auch als Knotenbezeichnet –seinen direkten Nachfolger-Knoten. Für den Zugriff auf die Liste wird lediglich eine Referenz auf das erste Element gespeichert. Dieses erste Element wird häufig auch als Head(=Kopf) der Liste bezeichnet.
+The simple chained list is one of the most common and most widely used dynamic data structures.It is characterised by the fact that data is stored in a list which can be traversed (=iterated) "in one direction".Each element in the list - also referred to as a node - "knows" its direct successor node. To access the list, only a reference to the first element is stored. This first element is often referred to as the head of the list.
+
+Translated with www.DeepL.com/Translator (free version)
 
 ## Contributing
 
