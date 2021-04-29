@@ -1,7 +1,7 @@
-#include <stdio.h>
+
+#include <iostream>
 #include <stdlib.h>
 #include <time.h>
-#include <stdbool.h>
 
 /// <summary>
 /// Constant value for dynamic formatting of input prompt length.
@@ -38,7 +38,7 @@ struct moment {
 struct measurement {
 	float temperatureInCelcius;
 	struct moment moment;
-	struct measurement* next;
+	struct measurement *next;
 };
 
 /// <summary>
@@ -48,7 +48,7 @@ struct measurement {
 /// <param name="momentA">Pointer to the first moment struct to compare.</param>
 /// <param name="momentB">Pointer to the second moment struct to compare.</param>
 /// <returns>TRUE if the two moments are equal, FALSE otherwise.</returns>
-bool areEqual(struct moment* momentA, struct moment* momentB) {
+bool areEqual(struct moment *momentA, struct moment *momentB) {
 	if (momentA->year != momentB->year) return false;
 	if (momentA->month != momentB->month) return false;
 	if (momentA->day != momentB->day) return false;
@@ -58,7 +58,7 @@ bool areEqual(struct moment* momentA, struct moment* momentB) {
 	return true;
 }
 
-bool isInChronologicalOrder(struct moment* momentA, struct moment* momentB) {
+bool isInChronologicalOrder(struct moment *momentA, struct moment *momentB) {
 	struct tm a = { momentA->second, momentA->minute, momentA->hour, momentA->day, momentA->month, momentA->year - 1900 };
 	struct tm b = { momentB->second, momentB->minute, momentB->hour, momentB->day, momentB->month, momentB->year - 1900 };
 	time_t ta = mktime(&a);
@@ -71,7 +71,7 @@ bool isInChronologicalOrder(struct moment* momentA, struct moment* momentB) {
 /// It may be used for any list related operations since it serves as the only
 /// "entrance point" into the singly linked list.
 /// </summary>
-struct measurement* head = NULL;
+struct measurement *head = NULL;
 
 
 /// <summary>
@@ -87,20 +87,20 @@ struct measurement* head = NULL;
 /// <param name="temperature">Temperature of measurement.</param>
 void insertAtEnd(int year, int month, int day, int hour, int minute, int second, float temperature) {
 	// Pointer to access the lists entries.
-	struct measurement* lastNode;
+	struct measurement *lastNode;
 
 	// Check if list already has an entry.
 	// If head references NULL, there's no entry yet.
 	if (head == NULL) {
 		// Allocate memory for new measurement entry and check if allocation worked.
-		if ((head = (struct measurement*)malloc(sizeof(struct measurement))) == NULL) {
+		if ((head = (struct measurement *)malloc(sizeof(struct measurement))) == NULL) {
 			// Allocation failed. Print error message and return.
 			printf("Cannot allocate memory.\n");
 			return;
 		}
 
 		// Assign the given values to the newly created measurement.
-		*head = (struct measurement){ temperature,{year, month, day, hour, minute, second} };
+		*head = { temperature, {year, month, day, hour, minute, second} };
 
 		// There's no successor for the new entry yet. Set next-pointer of entry to NULL.
 		head->next = NULL;
@@ -116,7 +116,7 @@ void insertAtEnd(int year, int month, int day, int hour, int minute, int second,
 		}
 
 		// Allocate memory for the new entry and check if allocation worked.
-		if ((lastNode->next = (struct measurement*)malloc(sizeof(struct measurement))) == NULL) {
+		if ((lastNode->next = (struct measurement *)malloc(sizeof(struct measurement))) == NULL) {
 			printf("Cannot allocate memory.\n");
 			return;
 		}
@@ -125,7 +125,7 @@ void insertAtEnd(int year, int month, int day, int hour, int minute, int second,
 		lastNode = lastNode->next;
 
 		// Assign the given values to the newly created measurement.
-		*lastNode = (struct measurement){ temperature, {year, month, day, hour, minute, second} };
+		*lastNode = { temperature, {year, month, day, hour, minute, second} };
 
 		// There's no successor for the new entry yet. Set next-pointer of entry to NULL.
 		lastNode->next = NULL;
@@ -146,14 +146,14 @@ void insertAtBeginning(int year, int month, int day, int hour, int minute, int s
 
 	// TODO: Implement this 
 
-	struct measurement* newNode;
+	struct measurement *newNode;
 
-	if ((newNode = (struct measurement*)malloc(sizeof(struct measurement))) == NULL) {
+	if ((newNode = (measurement *)malloc(sizeof(struct measurement))) == NULL) {
 		printf("Cannot allocate memory.\n");
 		return;
 	}
 
-	*newNode = (struct measurement){ temperature, { year, month, day, hour, minute, second} };
+	*newNode = { temperature, { year, month, day, hour, minute, second} };
 
 	newNode->next = head;
 	head = newNode;
@@ -178,10 +178,10 @@ void insertChronologically(int year, int month, int day, int hour, int minute, i
 	// TODO: Implement this function
 
 	// Will hold a reference to the node after which the new element needs to be inserted.
-	struct measurement* nodeToInsertAfter;
+	struct measurement *nodeToInsertAfter;
 
 	// Will hold a reference to the node to insert into the singly linked list.
-	struct measurement* newNode;
+	struct measurement *newNode;
 
 	if (head == NULL) {
 		// If there's no head, the list is currently empty. Let's just insert the new node at the beginning.
@@ -193,13 +193,13 @@ void insertChronologically(int year, int month, int day, int hour, int minute, i
 		nodeToInsertAfter = head;
 
 		// Allocate memory for the new node to insert into the singly linked list.
-		if ((newNode = (struct measurement*)malloc(sizeof(struct measurement))) == NULL) {
+		if ((newNode = (measurement *)malloc(sizeof(struct measurement))) == NULL) {
 			printf("Cannot allocate memory.\n");
 			return;
 		}
 
 		// Assign the provided parameter values to the new node referenced by the newNode pointer.
-		*newNode = (struct measurement){ temperature, { year, month, day, hour, minute, second} };
+		*newNode = { temperature, { year, month, day, hour, minute, second} };
 
 		// If the new nodes date/time is before the first nodes date/time,
 		// the new node needs to go at the beginning (head) of the singly linked list.
@@ -230,7 +230,7 @@ void deleteFirstElement() {
 
 	// This pointer will eventually hold a reference to the successor of the current head.
 	// Eventually means: In case there's no head at all, we actually won't need this pointer.
-	struct measurement* newHead;
+	struct measurement *newHead;
 
 	if (head != NULL) {
 		// Temporary reference to successor of current head.
@@ -249,12 +249,12 @@ void deleteFirstElement() {
 /// If there are multiple nodes which match the given moment in the list, only the first occurenct will be deleted.
 /// </summary>
 /// <param name="moment"></param>
-void deleteFirstOccurence(struct moment* moment) {
+void deleteFirstOccurence(struct moment *moment) {
 
 	// TODO: Implement this function!
 
 	// Pointer which references the node right before the node to remove from the singly linked list.
-	struct measurement* nodeBefore;
+	struct measurement *nodeBefore;
 
 	// If there's no head, there's no list at all.
 	if (head != NULL) {
@@ -280,7 +280,7 @@ void deleteFirstOccurence(struct moment* moment) {
 			// ... or we found a node whose date/time matches the given moment parameters value.
 			if (areEqual(&nodeBefore->next->moment, moment)) {
 				// Temporarly store a reference to the node to remove from the singly linked list.
-				struct measurement* nodeToDelete = nodeBefore->next;
+				struct measurement *nodeToDelete = nodeBefore->next;
 
 				// Update the next-reference for the node just before the one to remove...
 				nodeBefore->next = nodeToDelete->next;
@@ -317,7 +317,7 @@ void deleteLastNode() {
 
 	// The list contains more than one node.
 	// We now need to find the second last node.
-	struct measurement* secondLastNode = head;
+	struct measurement *secondLastNode = head;
 
 	while (secondLastNode->next->next != NULL) {
 		secondLastNode = secondLastNode->next;
@@ -335,7 +335,7 @@ void deleteLastNode() {
 /// The function returns a pointer to the newly created moment.
 /// Remember to free() the moment if you don't need it anymore.
 /// </summary>
-struct moment* readMoment(void) {
+struct moment *readMoment(void) {
 	int year, month, day, hour, minute, second;
 
 	// "Date [dd.mm.yyyy]",
@@ -345,7 +345,7 @@ struct moment* readMoment(void) {
 	printf("%*.*s : ", -INPUT_PROMPT_LENGTH, INPUT_PROMPT_LENGTH, "Time [hh:mm:ss]");
 	scanf_s("%2d:%2d:%2d", &hour, &minute, &second);
 
-	struct moment* moment = (struct moment*)malloc(sizeof(struct moment));
+	struct moment *moment = (struct moment *)malloc(sizeof(struct moment));
 	moment->year = year;
 	moment->month = month;
 	moment->day = day;
@@ -357,8 +357,8 @@ struct moment* readMoment(void) {
 }
 
 
-struct measurement* readInput(void) {
-	struct moment* moment;
+struct measurement *readInput(void) {
+	struct moment *moment;
 	float temperature;
 
 	moment = readMoment();
@@ -366,7 +366,7 @@ struct measurement* readInput(void) {
 	printf("%*.*s : ", -INPUT_PROMPT_LENGTH, INPUT_PROMPT_LENGTH, "Temperature [\370C]");
 	scanf_s("%f", &temperature);
 
-	struct measurement* m = (struct measurement*)malloc(sizeof(struct measurement));
+	struct measurement *m = (struct measurement *)malloc(sizeof(struct measurement));
 	m->moment = *moment;
 	m->temperatureInCelcius = temperature;
 	m->next = NULL;
@@ -374,7 +374,7 @@ struct measurement* readInput(void) {
 	return m;
 }
 
-void printNode(struct measurement* node) {
+void printNode(struct measurement *node) {
 	struct moment moment = node->moment;
 	printf("%*s--------------\n", LEFT_PADDING, "");
 	printf("%*s| %02d.%02d.%4d |\n", LEFT_PADDING, "", moment.day, moment.month, moment.year);
@@ -391,7 +391,7 @@ void printArrow() {
 }
 
 void printList() {
-	struct measurement* measurement = head;
+	struct measurement *measurement = head;
 
 	printf("\n\n");
 
@@ -433,8 +433,8 @@ int readMenuInput() {
 int main()
 {
 
-	struct measurement* measurement = NULL;
-	struct moment* moment = NULL;
+	struct measurement *measurement = NULL;
+	struct moment *moment = NULL;
 	int menuInput = readMenuInput();
 
 	system("CLS");

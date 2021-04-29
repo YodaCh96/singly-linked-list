@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{66d645c7-3b39-4eb5-ac8d-ec5f66b41c62}</ProjectGuid>
-    <RootNamespace>singlylinkedlist</RootNamespace>
+    <ProjectGuid>{6f19cf44-9800-4b50-a0a1-1288483b6a85}</ProjectGuid>
+    <RootNamespace>SinglyLinkedList</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -139,7 +139,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="singly-linked-list.c" />
+    <ClCompile Include="Singly Linked List.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
