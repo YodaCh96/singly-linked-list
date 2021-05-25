@@ -1,6 +1,35 @@
-# Single linked list
+# Einfach verkettete Liste
 
-The simple chained list is one of the most common and most widely used dynamic data structures.It is characterised by the fact that data is stored in a list which can be traversed (=iterated) "in one direction".Each element in the list - also referred to as a node - "knows" its direct successor node. To access the list, only a reference to the first element is stored. This first element is often referred to as the head of the list.
+Die einfach verkettete Liste ist eine der häufigsten und gebräuchlichsten, dynamischen Datenstrukturen. Sie zeichnet sich dadurch aus, dass Daten in einer Liste gespeichert werden, welche «in einer Richtung» durchlaufen (=iteriert) werden kann. Dabei «kennt» jedes Element in der Liste – auch als Knoten bezeichnet – seinen direkten Nachfolger-Knoten. Für den Zugriff auf die Liste wird lediglich eine Referenz auf das erste Element gespeichert. Dieses erste Element wird häufig auch als Head (=Kopf) der Liste bezeichnet.
+
+## Vorgehensweise
+
+Studieren Sie zuerst den Inhalt der Projektvorlage. Darin ist bereits funktionierender Code für verschiedene Aspekte der Applikation vorhanden:
+
+- C-Strukturen für die Modellierung eines Messwerts (measurement) und eines Zeitpunkts (moment)
+- Ausgabe einer Menü-Struktur
+- Einlesen und verarbeiten einer Menü-Option
+- Hilfsfunktionen für das Einlesen und Ausgeben von Daten (Messwerten)
+- Hilfsfunktionen für das Vergleichen von Datenpunkten (Vergleich von Datum/Zeit)
+- Die Funktion insertAtEnd() zum Einfügen eines neuen Knotens ans Ende der einfach verketteten Liste.
+
+Insbesondere die Funktion insertAtEnd() kann/soll als Referenz für die Implementation weiterer Listen-Operationen näher betrachtet werden.
+
+Sobald Sie mit der Struktur und dem Inhalt der bestehenden Applikation vertraut sind, können Sie sich an die Implementation der fünf verbleibenden Listen-Operationen machen. Für diese wurden bereits leere Funktionen angelegt, welche nun durch Sie implementiert werden sollen.
+
+Beachten Sie dazu auch die Dokumentation der jeweiligen Funktionen direkt in der Projektvorlage.
+
+Die nachfolgende Liste ist nach aufsteigender Schwierigkeit zum Implementieren geordnet:
+
+- deleteFirstElement(): Erstes Element (Head) aus der Liste löschen
+- insertAtBeginning(): Neuen Messwert am Anfang der Liste einfügen
+- deleteLastNode(): Letzten Messwert aus der Liste löschen
+- deleteFirstOccurence(): Ersten Messwert mit dem spezifizierten Wert für Datum/ Zeit aus der Liste löschen
+- insertChronologically(): Neuen Messwert in chronologisch aufsteigender Reihenfolge in die Liste einfügen
+
+## Aufgabenstellung
+
+Ergänzen Sie die Projektvorlage um die fünf vorbereiteten Listenoperationen. Halten Sie sich dazu an die oben genannte Vorgehensweise.
 
 ## Contributing
 
